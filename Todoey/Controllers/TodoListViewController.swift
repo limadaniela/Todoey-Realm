@@ -7,6 +7,7 @@
 
 import UIKit
 import RealmSwift
+import SwipeCellKit
 
 //change UIViewController to UITableViewController
 //As we've inherited UITableVIewController and added a tableViewController to the storyboard instead of a normal ViewController,
