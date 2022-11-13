@@ -9,8 +9,9 @@ import Foundation
 import RealmSwift
 
 class Category: Object {
-    //to use Realm, need to mark variables with @objc dynamic
+    //@objc dynamic makes name a dynamic variable, so we can monitor for changes while the app is running
     @objc dynamic var name: String = ""
+    //relationship that specifies that each item can have a number of items 
     let items = List<Item>()
     
 }

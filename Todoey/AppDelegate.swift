@@ -13,6 +13,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
+        //to find out where Realm file is saved 
         //print(Realm.Configuration.defaultConfiguration.fileURL)
         
         //Realm initialisation

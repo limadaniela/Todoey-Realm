@@ -8,12 +8,12 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
-
-//change UIViewController to UITableViewController
+ 
 //As we've inherited UITableVIewController and added a tableViewController to the storyboard instead of a normal ViewController,
 //we don't need to keep ViewController as a subclass of UIViewController, and link up any @IBOutlet or add the whole self.tableView.delegate to set ourselves as the delegate or data source,
 //because all of is automated behind the scenes by XCode
-class TodoListViewController: UITableViewController {
+//SwipeTableViewController inherits UITableViewController
+class TodoListViewController: SwipeTableViewController {
     
     //colection of results of Item objects
     var todoItems: Results<Item>?
@@ -22,7 +22,7 @@ class TodoListViewController: UITableViewController {
     
     var selectedCategory : Category? {
         didSet{
-            //load up all the to-do list items from database.
+            //loads up all the to-do list items from database.
             loadItems()
         }
     }
@@ -44,7 +44,7 @@ class TodoListViewController: UITableViewController {
     //to specify what cells should display
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //reusable cell
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         //if todoItems is not nil, then grab the item at indexPath.row
         //if todoItems is nil, shows a message
@@ -119,6 +119,7 @@ class TodoListViewController: UITableViewController {
                     print("Error saving new items, \(error)")
                 }
             }
+            //reload tableView with all the new data 
             self.tableView.reloadData()
             
         }
@@ -142,6 +143,19 @@ class TodoListViewController: UITableViewController {
         
         tableView.reloadData()
     }
+    
+    override func updateModel(at indexPath: IndexPath) {
+        if let item = todoItems?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(item)
+                }
+            } catch {
+                print("Error deleting Item, \(error)")
+            }
+        }
+    
+    }
 }
 
 //MARK: - Search Bar Methods
@@ -157,7 +171,7 @@ extension TodoListViewController: UISearchBarDelegate {
         
         tableView.reloadData()
     }
-    //to go back to original list of all items when clear searchBar
+    //to go back to original list of all items when clear/dismiss searchBar
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchBar.text?.count == 0 {
             loadItems()

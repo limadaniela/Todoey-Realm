@@ -13,6 +13,7 @@
 		65647A9928AF2F8300A03E21 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65647A9728AF2F8300A03E21 /* Main.storyboard */; };
 		65647A9B28AF2F8500A03E21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65647A9A28AF2F8500A03E21 /* Assets.xcassets */; };
 		65647A9E28AF2F8500A03E21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65647A9C28AF2F8500A03E21 /* LaunchScreen.storyboard */; };
+		659257C528EB8D43002298BA /* SwipeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659257C428EB8D43002298BA /* SwipeTableViewController.swift */; };
 		65D9E05228C1A9C10019D0D4 /* CategoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D9E05128C1A9C10019D0D4 /* CategoryViewController.swift */; };
 		65D9E05628C80DB70019D0D4 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D9E05528C80DB70019D0D4 /* Item.swift */; };
 		65D9E05828C80DD10019D0D4 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D9E05728C80DD10019D0D4 /* Category.swift */; };
@@ -30,6 +31,7 @@
 		65647A9A28AF2F8500A03E21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65647A9D28AF2F8500A03E21 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		65647A9F28AF2F8500A03E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		659257C428EB8D43002298BA /* SwipeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeTableViewController.swift; sourceTree = "<group>"; };
 		65D9E05128C1A9C10019D0D4 /* CategoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewController.swift; sourceTree = "<group>"; };
 		65D9E05528C80DB70019D0D4 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		65D9E05728C80DD10019D0D4 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				65647A9528AF2F8300A03E21 /* TodoListViewController.swift */,
 				65D9E05128C1A9C10019D0D4 /* CategoryViewController.swift */,
+				659257C428EB8D43002298BA /* SwipeTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				65D9E05228C1A9C10019D0D4 /* CategoryViewController.swift in Sources */,
 				65647A9628AF2F8300A03E21 /* TodoListViewController.swift in Sources */,
 				65647A9228AF2F8300A03E21 /* AppDelegate.swift in Sources */,
+				659257C528EB8D43002298BA /* SwipeTableViewController.swift in Sources */,
 				65D9E05628C80DB70019D0D4 /* Item.swift in Sources */,
 				65647A9428AF2F8300A03E21 /* SceneDelegate.swift in Sources */,
 				65D9E05828C80DD10019D0D4 /* Category.swift in Sources */,
