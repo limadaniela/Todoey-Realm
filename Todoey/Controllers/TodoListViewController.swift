@@ -154,7 +154,6 @@ class TodoListViewController: SwipeTableViewController {
                 print("Error deleting Item, \(error)")
             }
         }
-    
     }
 }
 
