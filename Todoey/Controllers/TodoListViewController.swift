@@ -8,6 +8,7 @@
 import UIKit
 import RealmSwift
 import SwipeCellKit
+import ChameleonFramework
  
 //As we've inherited UITableVIewController and added a tableViewController to the storyboard instead of a normal ViewController,
 //we don't need to keep ViewController as a subclass of UIViewController, and link up any @IBOutlet or add the whole self.tableView.delegate to set ourselves as the delegate or data source,
@@ -32,6 +33,8 @@ class TodoListViewController: SwipeTableViewController {
         
         //file path to Documents folder where items inckuded in to-do will be saved
         print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        
+        tableView.separatorStyle = .none
     }
     
     //MARK: - TableView Datasource Methods
@@ -52,6 +55,11 @@ class TodoListViewController: SwipeTableViewController {
             
             //label for every single cell
             cell.textLabel?.text = item.title
+            
+            if let color = UIColor(hexString: selectedCategory!.color)?.darken(byPercentage: CGFloat(indexPath.row) / CGFloat(todoItems!.count)) {
+                cell.backgroundColor = color
+                cell.textLabel?.textColor = ContrastColorOf(color, returnFlat: true)
+            }
             
             //to add or remove a checkmark on selected cell
             //Ternary operator ==>
