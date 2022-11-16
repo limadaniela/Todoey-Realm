@@ -46,7 +46,7 @@ class CategoryViewController: SwipeTableViewController {
         //if nill, the message will appear
         cell.textLabel?.text = categories?[indexPath.row].name ?? "No categories added"
         
-        cell.backgroundColor = RandomFlatColor()
+        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].color ?? "007AFF")
         
         return cell
     }
@@ -116,6 +116,7 @@ class CategoryViewController: SwipeTableViewController {
             let newCategory = Category()
             newCategory.name = textField.text!
             //to save the new Category to Realm database
+            newCategory.color = UIColor.randomFlat().hexValue()
             self.save(category: newCategory)
         }
         
