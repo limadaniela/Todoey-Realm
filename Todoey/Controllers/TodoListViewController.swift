@@ -16,11 +16,11 @@ import ChameleonFramework
 //SwipeTableViewController inherits UITableViewController
 class TodoListViewController: SwipeTableViewController {
     
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     //colection of results of Item objects
     var todoItems: Results<Item>?
-    
     let realm = try! Realm()
-    
     var selectedCategory : Category? {
         didSet{
             //loads up all the to-do list items from database.
@@ -31,10 +31,32 @@ class TodoListViewController: SwipeTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //file path to Documents folder where items inckuded in to-do will be saved
-        print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-        
         tableView.separatorStyle = .none
+    }
+    
+    //as viewDidLoad is called before the navigationController property has been updated, we use viewWillAppear to ensure code will work and app will not crash
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let colorHex = selectedCategory?.color {
+            
+            //Set the title to match the category
+            //we can be sure that selectedCategory it's not nil because we're inside an optional binding block
+            title = selectedCategory!.name
+            
+            guard let navBar = navigationController?.navigationBar else {fatalError("Navigation contoller does not exist.")
+            }
+            if let navBarColor = UIColor(hexString: colorHex) {
+                navBar.backgroundColor = navBarColor
+                
+                navBar.tintColor = ContrastColorOf(navBarColor, returnFlat: true)
+                
+                navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(navBarColor, returnFlat: true)]
+                
+                //set the background color of the searchBar
+                searchBar.barTintColor = navBarColor
+                searchBar.searchTextField.backgroundColor = FlatWhite()
+            }
+        }
     }
     
     //MARK: - TableView Datasource Methods
@@ -129,7 +151,6 @@ class TodoListViewController: SwipeTableViewController {
             }
             //reload tableView with all the new data 
             self.tableView.reloadData()
-            
         }
         //to add action to alert
         alert.addAction(action)

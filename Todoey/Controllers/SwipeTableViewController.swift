@@ -7,6 +7,7 @@
 
 import UIKit
 import SwipeCellKit
+import ChameleonFramework
 
 class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegate {
 
@@ -14,7 +15,6 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         super.viewDidLoad()
         
         tableView.rowHeight = 80.0
-
     }
     
     //TableView Datasource Methods
@@ -36,7 +36,6 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
             // handle action by updating model with deletion
             
             self.updateModel(at: indexPath)
-
         }
         
         // customize the action appearance
@@ -52,9 +51,7 @@ class SwipeTableViewController: UITableViewController, SwipeTableViewCellDelegat
         options.transitionStyle = .border
         return options
     }
-    
     func updateModel(at indexPath: IndexPath) {
-        
     }
 }
 

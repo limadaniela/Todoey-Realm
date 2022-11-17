@@ -24,7 +24,14 @@ class CategoryViewController: SwipeTableViewController {
         loadCategories()
         
         tableView.separatorStyle = .none
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        guard let navBar = navigationController?.navigationBar else {
+            fatalError("Navigation controller does not exist")
+        }
+        navBar.backgroundColor = UIColor(hexString: "007AFF")
+        navBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor : ContrastColorOf(UIColor(hexString: "007AFF")!, returnFlat: true)]
     }
     
     //MARK: - TableView DataSource Methods
@@ -35,19 +42,20 @@ class CategoryViewController: SwipeTableViewController {
         //if categories is nil, it will just return 1, and tableview will have just one cell
         return categories?.count ?? 1
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         //reusable cell
-        //to tap into the cell that gets created inside our super view 
+        //to tap into the cell that gets created inside our super view
         let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
-        //if not nil we get the Category name
-        //if nill, the message will appear
-        cell.textLabel?.text = categories?[indexPath.row].name ?? "No categories added"
-        
-        cell.backgroundColor = UIColor(hexString: categories?[indexPath.row].color ?? "007AFF")
-        
+        if let category = categories?[indexPath.row] {
+            cell.textLabel?.text = category.name
+            
+            guard let categoryColor = UIColor(hexString: category.color) else {fatalError()}
+            
+            cell.backgroundColor = categoryColor
+            cell.textLabel?.textColor = ContrastColorOf(categoryColor, returnFlat: true)
+        }
         return cell
     }
     
@@ -77,7 +85,6 @@ class CategoryViewController: SwipeTableViewController {
         } catch {
             print("Error saving category \(error)")
         }
-        
         tableView.reloadData()
     }
     
@@ -101,9 +108,9 @@ class CategoryViewController: SwipeTableViewController {
             }
         }
     }
-
+    
     //MARK: - Add New Categories
-
+    
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         //when we add a new item by clicking on the Add button, we create an alert that has a textField and an Add button.
         
@@ -120,7 +127,7 @@ class CategoryViewController: SwipeTableViewController {
             self.save(category: newCategory)
         }
         
-        //when adding a new item by clicking on the Add button, we create an alert 
+        //when adding a new item by clicking on the Add button, we create an alert
         alert.addAction(action)
         alert.addTextField { (field) in
             textField = field
